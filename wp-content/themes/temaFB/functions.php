@@ -28,10 +28,30 @@
 			'menu_title'	=> 'Footer',
 			'parent_slug'	=> 'theme-general-settings',
 		));	
+
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Theme Testimonial Settings',
+			'menu_title'	=> 'Testimonial ',
+			'parent_slug'	=> 'theme-general-settings',
+		));	
 	}
 	//shorcode
 	function jb_shortcode_de_contenido() {
-		return 'Esto es el contenido';
+		//echo do_shortcode("[single_testimonial id='155']");
 	}
 	add_shortcode('codigo', 'jb_shortcode_de_contenido'); 
+	//para llamerlo se llama en hmtl como [codigo]
+
+
+	//shorcode
+	function Testimoniales() {
+		if( have_rows('shortcode', 'option') ):
+		    while ( have_rows('shortcode', 'option') ) : the_row();
+		        $varaux = get_sub_field('shorcodetestimonial', 'option');
+				echo do_shortcode($varaux);
+		    endwhile;
+		endif;
+		//echo do_shortcode("[single_testimonial id='155']");
+	}
+	add_shortcode('testimoniales', 'Testimoniales'); 
 	//para llamerlo se llama en hmtl como [codigo]
